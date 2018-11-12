@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  php:
+    image: php
+    container_name: php-box
+    networks:
+      - my-net
+    volumes: ["/web:/web"]
+    stdin_open: true
+    tty: true
+    privileged: true
+  nginx:
+    image: nginx
+    container_name: nginx-box
+    ports:
+      - "80:80"
+    networks:
+      - my-net
+    volumes: ["/web:/web"]
+    stdin_open: true
+    tty: true
+    privileged: true
+networks:
+  my-net:
+    driver: bridge
+    ipam:
+       driver: default
